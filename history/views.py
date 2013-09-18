@@ -5,4 +5,6 @@ from history.models import History
  
 @login_required
 def displayHistory(request):
-	pass
+	hs, created = History.objects.get_or_create(owner=request.user)
+	print hs
+	return render_to_response('history/index.html', {'hs': hs})
