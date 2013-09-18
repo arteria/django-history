@@ -2,10 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
 
-
-HISTORY_DISPLAY_TYPES = (('new_article', "Created New Article"),
-                         )
 
 class HistoryEvent(models.Model): 
     timestamp = models.DateTimeField()
@@ -14,7 +12,7 @@ class HistoryEvent(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
-    display_as = models.CharField(max_length=100, choices = HISTORY_DISPLAY_TYPES, null=True, blank=True, default='')   
+    display_as = models.CharField(max_length=100, choices = getattr(settings, "HISTORY_DISPLAY_TYPES", ()), null=True, blank=True, default='')   
 
     def __unicode__(self):
         return "%s from %s" %(str(self.content_type), str(self.timestamp.date()))
