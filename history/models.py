@@ -1,22 +1,23 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
 
-HISTORY_EVENT_MODELS = ()
 
-HISTORY_DISPLAY_TYPES = () 
+HISTORY_DISPLAY_TYPES = (('new_article', "Created New Article"),
+                         )
 
 class HistoryEvent(models.Model): 
     timestamp = models.DateTimeField()
     is_internal = models.BooleanField(default=False) 
-    is_hidden = models.BooleanField(default=False) 
-    app_model_obj = models.CharField(max_length=100, choices = HISTORY_EVENT_MODELS)
-    obj_id = models.IntegerField(help_text="ID of the obj injected based on app_model_obj")
+    is_hidden = models.BooleanField(default=False)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
     display_as = models.CharField(max_length=100, choices = HISTORY_DISPLAY_TYPES, null=True, blank=True, default='')   
 
     def __unicode__(self):
-        s =  ""+ str(self.timestamp)
-        s += " " + self.app_model_obj + " (ID " + str(self.obj_id) + ") " + self.display_as
-        return s
+        return "%s from %s" %(str(self.content_type), str(self.timestamp.date()))
 
 
 class History(models.Model):
@@ -24,4 +25,4 @@ class History(models.Model):
     events = models.ManyToManyField(HistoryEvent)
 
     def __unicode__(self):
-        return self.owner.username + "'s History"
+        return "%s's History" %self.owner.username
