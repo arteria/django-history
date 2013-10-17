@@ -1,6 +1,6 @@
 from django.contrib import admin
  
-from history.models import *
+from .models import *
 
 
 class HistoryEventAdmin(admin.ModelAdmin):

@@ -1,0 +1,9 @@
+include AUTHORS
+include LICENSE
+include DESCRIPTION
+include CHANGELOG.txt
+include README.md
+graft history
+global-exclude *.orig *.pyc *.log *.swp
+prune history/tests/coverage
+prune history/.ropeproject
