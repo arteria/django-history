@@ -1,5 +1,5 @@
 import datetime
-from history.models import History, HistoryEvent
+from .models import History, HistoryEvent
 from django.contrib.contenttypes.models import ContentType
 
 

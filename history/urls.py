@@ -1,5 +1,9 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('history.views',
-    (r'^load/',  'displayHistory'),
+from . import views
+
+urlpatterns = patterns(
+     '',
+     (r'^load/',  'displayHistory', name='history_display'),
 )
+
