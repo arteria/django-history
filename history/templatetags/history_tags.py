@@ -32,7 +32,7 @@ def renderHistoryEvent(request, historyEvent):
     
     
 @register.filter
-def showHistory(who, amount=10, pageIndex=1):
+def showHistory(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
         hs, created = History.objects.get_or_create(owner=None)
     else:
