@@ -13,8 +13,8 @@ class HistoryEvent(models.Model):
     is_internal = models.BooleanField(default=False, help_text=_('By checking this, this event will never be shown to a user. Internal (system) usage only.')) 
     is_hidden = models.BooleanField(default=False, help_text=_('Allows the user to hide events from the timeline. Be careful with Anonymous History.'))
     content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField(null=True, blank=True)
-    content_object = generic.GenericForeignKey('content_type', 'object_id', null=True, blank=True)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
     display_as = models.CharField(max_length=100, choices = getattr(settings, "HISTORY_DISPLAY_TYPES", ()), null=True, blank=True, default='')
 
     def __unicode__(self):
