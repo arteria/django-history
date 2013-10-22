@@ -8,8 +8,8 @@ from django.utils.translation import ugettext as _
 import datetime
  
 class HistoryEvent(models.Model): 
-    event_timestamp = models.DateTimeField(help_text=_('When does it happen?'), default=datetime.datetime.utcnow)
-    publish_timestamp = models.DateTimeField(help_text=_('When should this event show up in the timeline/history?'), default=datetime.datetime.utcnow)
+    event_timestamp = models.DateTimeField(help_text=_('When does it happen?'), default=datetime.datetime.utcnow())
+    publish_timestamp = models.DateTimeField(help_text=_('When should this event show up in the timeline/history?'), default=datetime.datetime.utcnow())
     is_internal = models.BooleanField(default=False, help_text=_('By checking this, this event will never be shown to a user. Internal (system) usage only.')) 
     is_hidden = models.BooleanField(default=False, help_text=_('Allows the user to hide events from the timeline. Be careful with Anonymous History.'))
     content_type = models.ForeignKey(ContentType)
@@ -18,7 +18,7 @@ class HistoryEvent(models.Model):
     display_as = models.CharField(max_length=100, choices = getattr(settings, "HISTORY_DISPLAY_TYPES", ()), null=True, blank=True, default='')
 
     def __unicode__(self):
-        return "%s from %s" %(str(self.content_type), str(self.timestamp.date()))
+        return "%s from %s" %(str(self.content_type), str(self.event_timestamp.date()))
 
 
 class History(models.Model):
