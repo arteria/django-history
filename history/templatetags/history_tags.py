@@ -37,7 +37,7 @@ def showHistory(who, amount=10, pageIndex=1):
         hs, created = History.objects.get_or_create()
     else:
         # who is an username 
-        hs, created = History.objects.get_or_create(owner.username=who)
+        hs, created = History.objects.get_or_create(owner__username=who)
     if created:            
         hs.save()
     isFirst = (pageIndex == 1) # could be used to show a header
