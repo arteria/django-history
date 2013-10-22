@@ -16,7 +16,7 @@ To get the latest commit from GitHub
 
 .. code-block:: bash
 
-    pip install -e git+git://github.com/mbrochh/django-reusable-app-template.git#egg=history
+    pip install -e git+git://github.com/arteria/django-history.git#egg=history
 
 TODO: Describe further installation steps (edit / remove the examples below):
 
@@ -64,17 +64,4 @@ templatetags.
 Contribute
 ----------
 
-If you want to contribute to this project, please perform the following steps
-
-.. code-block:: bash
-
-    # Fork this repository
-    # Clone your fork
-    mkvirtualenv -p python2.7 django-history
-    make develop
-
-    git co -b feature_branch master
-    # Implement your feature and tests
-    git add . && git commit
-    git push -u origin feature_branch
-    # Send us a pull request for your feature branch
+If you want to contribute to this project, the best way is to send a pull request. Thanks in advance.

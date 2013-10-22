@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
-
+from django.utils.translation import ugettext as _
 
 class HistoryEvent(models.Model): 
     timestamp = models.DateTimeField()
-    is_internal = models.BooleanField(default=False) 
-    is_hidden = models.BooleanField(default=False)
+    is_internal = models.BooleanField(default=False, help_text=_('By checking this, this event will never be shown to a user. Internal (system) usage only.')) 
+    is_hidden = models.BooleanField(default=False, help_text=_('Allows the user to hide events from the timeline. Be careful with Anonymous History.'))
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
@@ -19,8 +19,10 @@ class HistoryEvent(models.Model):
 
 
 class History(models.Model):
-    owner = models.ForeignKey(User, unique=True)
+    owner = models.ForeignKey(User, unique=True, null=True, blank=True)
     events = models.ManyToManyField(HistoryEvent)
 
     def __unicode__(self):
-        return "%s's History" %self.owner.username
+        if self.owner:
+            return "%s's History" % self.owner.username
+        return "Anonymous History"
