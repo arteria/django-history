@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.contrib.contenttypes.models import ContentType
 
-import datetime
+from datetime import datetime, timedelta
 
 from .models import History, HistoryEvent
 
