@@ -19,15 +19,13 @@ def renderHistoryEvent(request, historyEvent):
     '''
     '''
     try:
-        pass
+        return render_to_string(historyEvent.display_as, { 'obj': historyEvent.content_object,
+                                                           'historyEvent': historyEvent,
+                                                         }, context_instance=RequestContext(request))
     except Exception, ex:
-        try:
-            if settings.DEBUG:
-                return "ERROR "+ str(timeLineEvent.id) + " - " + str(ex) 
-            return safe("<!-- ERROR: " + str(ex)  + "-->")
-             
-        except:
-            pass                                                              
+        if settings.DEBUG:
+            return "ERROR: ID=%s %s " % (str(historyEvent.id), str(ex))
+        return "<!-- ERROR: %s -->" % str(ex)
     return safe("NULL<!-- NULL -->")
     
     
