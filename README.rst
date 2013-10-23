@@ -1,7 +1,7 @@
 Django History
 ============
 
-A reusable Django app showing the history of object based events. This is also "known" as timeline.  
+django-history [https://github.com/arteria/django-history] is a reusable Django app showing the history of object based events. This is also "known" as timeline.  
 
 Installation
 ------------
@@ -62,9 +62,32 @@ Don't forget to migrate your database
 Usage
 -----
 
-TODO: Describe usage or point to docs. Also describe available settings and
-templatetags.
+Follow these steps to set up your history (timeline).
 
++ Create templates in ``history/<template name>.html`` 
++ Register the templates in ``HISTORY_DISPLAY_TYPES`` defined in your project settings.
+
+
+
+History event rendering
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The objects is passed as ``obj`` to the template defined in ``HISTORY_DISPLAY_TYPES``. In our "Hello User" template (history/hello_user.html), it's possible to access to the user's username by using ``{{ obj.username }}``. 
+
+TODO
+----
+
++ Potect private timelines
++ Allow sticky events (highlight, keep them on top)
++ moments.js https://github.com/moment/moment/
++ AJAX loading of next page
++ Settings support (load n events per page)
++ ...
+
+License
+-------
+
+Django History is brought to you by arteria GmbH, licensed under the MIT License (MIT). 
 
 Contribute
 ----------
