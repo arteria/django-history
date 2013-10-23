@@ -30,7 +30,12 @@ In settings.py add ``history`` to your ``INSTALLED_APPS`` and define ``HISTORY_D
     )
     
     HISTORY_DISPLAY_TYPES = () 
-
+    # Example: 
+    # HISTORY_DISPLAY_TYPES = (('history/hello_world.html', 'Hello World'), 
+    #                          ('history/hello_user.html',  'Hello User'), 
+    #                         )
+	
+	
 Add the ``history`` URLs to your ``urls.py``
 
 .. code-block:: python

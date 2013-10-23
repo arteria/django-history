@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load history_tags %}  
+
+{% if isFirst %}
+	<h1>{% blocktrans %}History{% endblocktrans %}</h1>
+{% else %}
+    {# no header #}
+{% endif %}
+ 
+{% for tle in listOfHistoryEvents %}
+    <div id="history_event_container_{{ tle.id }}">
+        {{ request|renderHistoryEvent:tle|safe }}
+		<hr>
+    </div>
+{% empty %}
+    {% blocktrans %}No History available!{% endblocktrans %}
+{% endfor %} 
+ 
+{% if hasMoreEvents %}
+	<a href="#">{% blocktrans %}Load more Events.{% endblocktrans %}</a>
+{% else %}
+	<!-- the end -->
+{% endif %}
