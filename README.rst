@@ -62,8 +62,14 @@ Don't forget to migrate your database
 Usage
 -----
 
-TODO: Describe usage or point to docs. Also describe available settings and
-templatetags.
+Follow these steps to set up your history (timeline).
+
++ Define templates in ``HISTORY_DISPLAY_TYPES``
+ 
+
+History event rendering
+~~~~~~~~~~~~~~~~~~~~~~~
+The objects is passed as ``obj`` to the template defined in ``HISTORY_DISPLAY_TYPES``. In our "Hello User" template (history/hello_user.html), it's possible to access to the user's username by using ``{{ obj.username }}``. 
 
 
 Contribute

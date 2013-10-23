@@ -26,7 +26,7 @@ def renderHistoryEvent(request, historyEvent):
         if settings.DEBUG:
             return "ERROR: ID=%s %s " % (str(historyEvent.id), str(ex))
         return "<!-- ERROR: %s -->" % str(ex)
-    return safe("NULL<!-- NULL -->")
+    return safe("<!-- NULL -->")
     
     
 @register.filter
