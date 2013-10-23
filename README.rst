@@ -64,8 +64,10 @@ Usage
 
 Follow these steps to set up your history (timeline).
 
-+ Define templates in ``HISTORY_DISPLAY_TYPES``
- 
++ Create templates in history/<template name>.html and register the 
++ .. templates in ``HISTORY_DISPLAY_TYPES`` defined in your project settings.
+
+
 
 History event rendering
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,7 +78,14 @@ TODO
 
 + Potect private timelines
 + Allow sticky events (highlight, keep them on top)
++ moments.js https://github.com/moment/moment/
++ AJAX loading of next page
++ 
 
+License
+-------
+
+Django History is brought to you with the MIT License (MIT).
 
 Contribute
 ----------
