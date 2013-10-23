@@ -64,8 +64,8 @@ Usage
 
 Follow these steps to set up your history (timeline).
 
-+ Create templates in history/<template name>.html and register the 
-+ .. templates in ``HISTORY_DISPLAY_TYPES`` defined in your project settings.
++ Create templates in ``history/<template name>.html`` 
++ Register the templates in ``HISTORY_DISPLAY_TYPES`` defined in your project settings.
 
 
 
@@ -87,7 +87,7 @@ TODO
 License
 -------
 
-Django History is brought to you with the MIT License (MIT).
+Django History is brought to you by arteria GmbH, licensed under the MIT License (MIT). 
 
 Contribute
 ----------
