@@ -8,12 +8,21 @@ from datetime import datetime, timedelta
 
 from .models import History, HistoryEvent
 
-
+ 
 def createEvent(aModel, anId):
     ct = ContentType.objects.get_for_model(aModel)
-    h = HistoryEvent(timestamp=datetime.now(), content_type=ct, object_id=anId)
+    h = HistoryEvent(content_type=ct, object_id=anId)
     h.save()
+    return h
 
+
+def getOrCreateEvent(aModel, anId):
+    ct = ContentType.objects.get_for_model(aModel)
+    h, created = HistoryEvent.objects.get_or_create(content_type=ct, object_id=anId)
+    h.save()
+    return h, created
+     
+    
 def addEventToHistory(anEvent, anUser=None):
 	hs, created = History.objects.get_or_create(owner=anUser)
 	if created:
