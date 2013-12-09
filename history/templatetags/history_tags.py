@@ -5,6 +5,7 @@ from django.utils.timesince import timesince
 from django.utils.encoding import smart_str, smart_unicode
 from django.template.defaultfilters import safe
 from django.template.loader import render_to_string
+from django.conf import settings
 
 from datetime import datetime, timedelta
     
