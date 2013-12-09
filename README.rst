@@ -93,3 +93,9 @@ Contribute
 ----------
 
 If you want to contribute to this project, the best way is to send a pull request. Thanks in advance.
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/philippeowagner/django-history/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+
