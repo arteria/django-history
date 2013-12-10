@@ -75,8 +75,8 @@ The objects is passed as ``obj`` to the template defined in ``HISTORY_DISPLAY_TY
 
 Settings
 ~~~~~~~~
-+ HISTORY_USE_UTC (default is False), set to True to use datetime.utcnow() instead of datetime.now() in history rendering.
-
++ HISTORY_USE_UTC = False (default is False), set to True to use datetime.utcnow() instead of datetime.now() in history rendering.
++ HISTORY_ORDER_BY = 'publish_timestamp' (or 'event_timestamp', dafault is 'publish_timestamp') 
 
 History and change log
 ----------------------
@@ -90,6 +90,7 @@ Development
 + UTC support, utcnow vs. now
 + New wrapper to control amount of events through template tag.
 + Stricky in ordering
++ Ordering by publish or event timestamp
 
 0.1.0
 ~~~~~

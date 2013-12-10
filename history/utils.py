@@ -66,9 +66,14 @@ def showHistory(request, who, amount=10, pageIndex=1):
     else:
         now = datetime.now()
     
-    historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(is_internal=True).extra(
-            select={"tmpOrder":"COALESCE(is_sticky, event_timestamp)"}, order_by=["-tmpOrder"])
-    
+    # publish_timestamp or event_timestamp
+    if getattr(settings, 'HISTORY_ORDER_BY', "publish_timestamp") == "publish_timestamp":
+        historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(is_internal=True).extra(
+                select={"tmpOrder":"COALESCE(is_sticky, publish_timestamp)"}, order_by=["-tmpOrder"])
+    else:
+        historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(is_internal=True).extra(
+                select={"tmpOrder":"COALESCE(is_sticky, event_timestamp)"}, order_by=["-tmpOrder"])
+        
     paginator = Paginator(historyEvents, amount)
     thisPage = paginator.page(pageIndex)
     hasMore = thisPage.has_next()
