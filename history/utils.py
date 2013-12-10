@@ -43,12 +43,12 @@ def showHistoryWrapper(request, arguments):
     lWho = lArgs[0]
     
     try:
-        lAmount = lArgs[1]
+        lAmount = int(lArgs[1])
     except:
         # default
         lAmount = 10
         
-    showHistory(request, who=lWho, amount=lAmount, pageIndex=1)
+    return showHistory(request, who=lWho, amount=lAmount, pageIndex=1)
     
 
 def showHistory(request, who, amount=10, pageIndex=1):
