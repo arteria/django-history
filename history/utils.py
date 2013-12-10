@@ -31,7 +31,24 @@ def addEventToHistory(anEvent, anUser=None):
 
 
 
-
+def showHistoryWrapper(request, arguments):
+    '''
+    Wrapper for showHistory
+    0 : who
+    1 : amount, eg. 10, 20, ..
+    '''
+    lArgs = arguments.split('|')
+    
+    lWho = lArgs[0]
+    
+    try:
+        lAmount = lArgs[1]
+    except:
+        # default
+        lAmount = 10
+        
+    showHistory(request, who=lWho, amount=lAmount, pageIndex=1)
+    
 
 def showHistory(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
@@ -42,7 +59,15 @@ def showHistory(request, who, amount=10, pageIndex=1):
     if created:            
         hs.save()
     isFirst = (pageIndex == 1) # could be used to show a header
-    historyEvents = hs.events.filter(publish_timestamp__lte=datetime.utcnow()).exclude(is_hidden=True).exclude(is_internal=True).order_by("-event_timestamp")
+    
+    if getattr(settings, 'HISTORY_USE_UTC', False):
+        now = datetime.utcnow()
+    else:
+        now = datetime.now()
+    
+    historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(is_internal=True).extra(
+            select={"tmpOrder":"COALESCE(is_sticky, event_timestamp)"}, order_by=["-tmpOrder"])
+    
     paginator = Paginator(historyEvents, amount)
     thisPage = paginator.page(pageIndex)
     hasMore = thisPage.has_next()

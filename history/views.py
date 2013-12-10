@@ -10,7 +10,7 @@ from .models import History
 #TODO:
 def displayHistory(request, anUser=None):
 	'''
-    Returns the history for an user or the anonymous history.
+    Returns the first 10 events of the history for an user or the anonymous history.
     '''
     response = showHistory(request, anUser, amount=10, pageIndex=1)  # this is the history timeline as by using the template tag...
     return render_to_response('history/index.html', {})
