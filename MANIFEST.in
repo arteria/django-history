@@ -7,3 +7,5 @@ graft history
 global-exclude *.orig *.pyc *.log *.swp
 prune history/tests/coverage
 prune history/.ropeproject
+recursive-include history/templates *
+recursive-include docs *

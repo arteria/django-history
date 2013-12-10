@@ -74,6 +74,21 @@ History event rendering
 
 The objects is passed as ``obj`` to the template defined in ``HISTORY_DISPLAY_TYPES``. In our "Hello User" template (history/hello_user.html), it's possible to access to the user's username by using ``{{ obj.username }}``. 
 
+History and change log
+----------------------
+
+Development
+~~~~~~~~~~
+
++ Fixed Manifest.in
++ Added ``is_sticky`` a flag that holds events on top of the timeline. Please migrate manually. Thanks.
++ Added ``generic_flag`` a integer attribute for generic 3rd party usage. Please migrate manually. Thanks.
+
+0.1.0
+~~~~~
+
++ Initial version
+
 TODO
 ----
 
