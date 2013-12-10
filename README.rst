@@ -91,6 +91,8 @@ Development
 + New wrapper to control amount of events through template tag.
 + Stricky in ordering
 + Ordering by publish or event timestamp
++ showUpcomming, methods for showing upcomming events, templage tag ``showUpcomming``.
+
 
 0.1.0
 ~~~~~
@@ -107,7 +109,7 @@ TODOs and know issues
 + Settings support (load n events per page)
 + displayHistoryEvent(...)
 + Settings for default amount of events (10 currently)
-
++ add template for upcomming events
 
 License
 -------

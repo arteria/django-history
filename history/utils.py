@@ -31,6 +31,25 @@ def addEventToHistory(anEvent, anUser=None):
 	hs.events.add(anEvent)
 
 
+def showUpcommingWrapper(request, arguments):
+    '''
+    Wrapper for showUpcomming
+    0 : who
+    1 : amount, eg. 10, 20, ..
+    '''
+    lArgs = arguments.split('|')
+    
+    lWho = lArgs[0]
+    
+    try:
+        lAmount = int(lArgs[1])
+    except:
+        # default
+        lAmount = 10
+        
+    return showUpcomming(request, who=lWho, amount=lAmount, pageIndex=1)
+    
+    
 
 def showHistoryWrapper(request, arguments):
     '''
@@ -50,7 +69,38 @@ def showHistoryWrapper(request, arguments):
         
     return showHistory(request, who=lWho, amount=lAmount, pageIndex=1)
     
-
+    
+def showUpcomming(request, who, amount=10, pageIndex=1):
+    if who == "anonymous":
+        hs, created = History.objects.get_or_create(owner=None)
+    else:
+        # 'who' is an username (string)
+        hs, created = History.objects.get_or_create(owner__username=who)
+    if created:            
+        hs.save()
+    isFirst = (pageIndex == 1) # could be used to show a header
+    
+    if getattr(settings, 'HISTORY_USE_UTC', False):
+        now = datetime.utcnow()
+    else:
+        now = datetime.now()
+        
+    futureEvents = hs.events.filter(event_timestamp__gte=now).exclude(is_hidden=True).exclude(
+        is_internal=True).order_by('event_timestamp')
+    paginator = Paginator(futureEvents, amount)
+    thisPage = paginator.page(pageIndex)
+    hasMore = thisPage.has_next()
+    listOfFutureEvents = thisPage.object_list
+    
+    return safe(render_to_string('history/upcomming.html', {'listOfFutureEvents': listOfFutureEvents,
+                                                          'hasMore': hasMore,
+                                                          'isFirst': isFirst,
+                                                          'pageIndex': pageIndex,
+                                                         }, context_instance=RequestContext(request)))
+                                                         
+        
+        
+        
 def showHistory(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
         hs, created = History.objects.get_or_create(owner=None)
@@ -74,8 +124,8 @@ def showHistory(request, who, amount=10, pageIndex=1):
         historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(is_internal=True).extra(
                 select={"tmpOrder":"COALESCE(is_sticky, event_timestamp)"}, order_by=["-tmpOrder"])
                 
-    historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(
-        is_internal=True).order_by('-publish_timestamp', 'is_sticky')
+    #historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(
+    #    is_internal=True).order_by('-publish_timestamp', 'is_sticky')
     paginator = Paginator(historyEvents, amount)
     thisPage = paginator.page(pageIndex)
     hasMore = thisPage.has_next()

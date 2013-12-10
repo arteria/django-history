@@ -33,3 +33,5 @@ def renderHistoryEvent(request, historyEvent):
 
 # Allow to use showHistory as template tag
 register.filter('showHistory', showHistoryWrapper)
+register.filter('showUpcomming', showUpcommingWrapper)
+
