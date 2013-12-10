@@ -3,6 +3,7 @@ from django.template.defaultfilters import safe
 from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
 
 from datetime import datetime, timedelta
 
