@@ -75,7 +75,7 @@ def showHistory(request, who, amount=10, pageIndex=1):
                 select={"tmpOrder":"COALESCE(is_sticky, event_timestamp)"}, order_by=["-tmpOrder"])
                 
     historyEvents = hs.events.filter(publish_timestamp__lte=now).exclude(is_hidden=True).exclude(
-        is_internal=True).order_by('is_sticky','publish_timestamp')
+        is_internal=True).order_by('publish_timestamp', 'is_sticky')
     paginator = Paginator(historyEvents, amount)
     thisPage = paginator.page(pageIndex)
     hasMore = thisPage.has_next()
