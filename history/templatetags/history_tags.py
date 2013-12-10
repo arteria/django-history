@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
     
 
 
-from history.utils import showHistoryWrapper
+from history.utils import showHistoryWrapper, showUpcommingWrapper
 
 register = template.Library()
 
