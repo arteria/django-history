@@ -68,13 +68,38 @@ Follow these steps to set up your history (timeline).
 + Register the templates in ``HISTORY_DISPLAY_TYPES`` defined in your project settings.
 
 
-
 History event rendering
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 The objects is passed as ``obj`` to the template defined in ``HISTORY_DISPLAY_TYPES``. In our "Hello User" template (history/hello_user.html), it's possible to access to the user's username by using ``{{ obj.username }}``. 
 
-TODO
+Settings
+~~~~~~~~
++ HISTORY_USE_UTC = False (default is False), set to True to use datetime.utcnow() instead of datetime.now() in history rendering.
++ HISTORY_ORDER_BY = 'publish_timestamp' (or 'event_timestamp', dafault is 'publish_timestamp') 
+
+History and change log
+----------------------
+
+Development
+~~~~~~~~~~
+
++ Fixed Manifest.in
++ Added ``is_sticky`` a flag that holds events on top of the timeline. Please migrate manually. Thanks.
++ Added ``generic_flag`` a integer attribute for generic 3rd party usage. Please migrate manually. Thanks.
++ UTC support, utcnow vs. now
++ New wrapper to control amount of events through template tag.
++ Stricky in ordering
++ Ordering by publish or event timestamp
++ showUpcomming, methods for showing upcomming events, templage tag ``showUpcomming``.
+
+
+0.1.0
+~~~~~
+
++ Initial version
+
+TODOs and know issues
 ----
 
 + Potect private timelines
@@ -82,7 +107,9 @@ TODO
 + moments.js https://github.com/moment/moment/
 + AJAX loading of next page
 + Settings support (load n events per page)
-+ ...
++ displayHistoryEvent(...)
++ Settings for default amount of events (10 currently)
++ add template for upcomming events
 
 License
 -------

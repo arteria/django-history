@@ -12,6 +12,8 @@ class HistoryEvent(models.Model):
     publish_timestamp = models.DateTimeField(help_text=_('When should this event show up in the timeline/history?'), default=datetime.datetime.utcnow())
     is_internal = models.BooleanField(default=False, help_text=_('By checking this, this event will never be shown to a user. Internal (system) usage only.')) 
     is_hidden = models.BooleanField(default=False, help_text=_('Allows the user to hide events from the timeline. Be careful with Anonymous History.'))
+    is_sticky = models.BooleanField(default=False, help_text=_('Keeps the event on top from the timeline.'))
+    generic_flag = models.IntegerField(blank=True, null=True, help_text=_("Generic flag field."))
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
