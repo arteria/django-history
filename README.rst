@@ -109,7 +109,8 @@ TODOs and know issues
 + Settings support (load n events per page)
 + displayHistoryEvent(...)
 + Settings for default amount of events (10 currently)
-+ add template for upcomming events
++ Add template for upcomming events
++ Send signal when a new event is added to the history
 
 License
 -------
