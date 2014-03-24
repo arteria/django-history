@@ -111,6 +111,7 @@ TODOs and know issues
 + Settings for default amount of events (10 currently)
 + Add template for upcomming events
 + Send signal when a new event is added to the history
++ Ordering on past events (HISTORY_ORDER_BY) in utils.py  fx: showAll()
 
 License
 -------
