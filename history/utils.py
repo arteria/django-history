@@ -99,9 +99,7 @@ def showAll(request, who, amount=10, pageIndex=1):
     paginator = Paginator(allEvents, amount)
     thisPage = paginator.page(pageIndex)
     hasMore = thisPage.has_next()
-    listOfFutureEvents = thisPage.object_list
-    
-    return safe(render_to_string('history/history.html', {'listOfFutureEvents': listOfFutureEvents,
+    return safe(render_to_string('history/stream.html', {'events': thisPage.object_list,
                                                           'hasMore': hasMore,
                                                           'isFirst': isFirst,
                                                           'pageIndex': pageIndex,
