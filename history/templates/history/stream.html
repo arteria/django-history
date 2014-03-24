@@ -2,22 +2,22 @@
 {% load history_tags %}  
 
 {% if isFirst %}
-	<h1>{% blocktrans %}History{% endblocktrans %}</h1>
+	<h1>{% blocktrans %}Stream{% endblocktrans %}</h1>
 {% else %}
     {# no header #}
 {% endif %}
  
-{% for tle in listOfHistoryEvents %}
+{% for tle in events %}
     <div id="history_event_container_{{ tle.id }}">
         {{ request|renderHistoryEvent:tle|safe }}
 		<hr>
     </div>
 {% empty %}
-    {% blocktrans %}No History available!{% endblocktrans %}
+    {% blocktrans %}No stream available!{% endblocktrans %}
 {% endfor %} 
  
 {% if hasMoreEvents %}
-	<a href="#">{% blocktrans %}Load more Events.{% endblocktrans %}</a>
+	<a href="#">{% blocktrans %}Load more events.{% endblocktrans %}</a>
 {% else %}
 	<!-- the end -->
 {% endif %}
