@@ -30,7 +30,23 @@ def addEventToHistory(anEvent, anUser=None):
 		hs.save()
 	hs.events.add(anEvent)
 
-
+def showFullStreamWrapper(request, arguments):
+    '''
+    Wrapper for showHistory
+    0 : who
+    1 : amount, eg. 10, 20, ..
+    '''
+    lArgs = arguments.split('|')
+    lWho = lArgs[0]
+    try:
+        lAmount = int(lArgs[1])
+    except:
+        # default
+        lAmount = 10
+        
+    return showAll(request, who=lWho, amount=lAmount, pageIndex=1)
+    
+    
 def showUpcommingWrapper(request, arguments):
     '''
     Wrapper for showUpcomming
@@ -38,7 +54,6 @@ def showUpcommingWrapper(request, arguments):
     1 : amount, eg. 10, 20, ..
     '''
     lArgs = arguments.split('|')
-    
     lWho = lArgs[0]
     
     try:
@@ -58,7 +73,6 @@ def showHistoryWrapper(request, arguments):
     1 : amount, eg. 10, 20, ..
     '''
     lArgs = arguments.split('|')
-    
     lWho = lArgs[0]
     
     try:
@@ -69,6 +83,32 @@ def showHistoryWrapper(request, arguments):
         
     return showHistory(request, who=lWho, amount=lAmount, pageIndex=1)
     
+
+
+def showAll(request, who, amount=10, pageIndex=1):
+    if who == "anonymous":
+        hs, created = History.objects.get_or_create(owner=None)
+    else:
+        # 'who' is an username (string)
+        hs, created = History.objects.get_or_create(owner__username=who)
+    if created:            
+        hs.save()
+    isFirst = (pageIndex == 1) # could be used to show a header
+    
+    allEvents = hs.events.all().exclude(is_hidden=True).exclude(is_internal=True).order_by('event_timestamp')
+    paginator = Paginator(allEvents, amount)
+    thisPage = paginator.page(pageIndex)
+    hasMore = thisPage.has_next()
+    listOfFutureEvents = thisPage.object_list
+    
+    return safe(render_to_string('history/upcomming.html', {'listOfFutureEvents': listOfFutureEvents,
+                                                          'hasMore': hasMore,
+                                                          'isFirst': isFirst,
+                                                          'pageIndex': pageIndex,
+                                                         }, context_instance=RequestContext(request)))
+                                                         
+                                                         
+                                                         
     
 def showUpcomming(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
@@ -99,8 +139,7 @@ def showUpcomming(request, who, amount=10, pageIndex=1):
                                                          }, context_instance=RequestContext(request)))
                                                          
         
-        
-        
+                
 def showHistory(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
         hs, created = History.objects.get_or_create(owner=None)
