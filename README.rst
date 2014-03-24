@@ -84,13 +84,14 @@ History and change log
 Development
 ~~~~~~~~~~
 
++ ``showAll`` methode showing the past and upcomming events in one stream.
 + Fixed Manifest.in
 + Added ``is_sticky`` a flag that holds events on top of the timeline. Please migrate manually. Thanks.
 + Added ``generic_flag`` a integer attribute for generic 3rd party usage. Please migrate manually. Thanks.
 + UTC support, utcnow vs. now
 + New wrapper to control amount of events through template tag.
 + Stricky in ordering
-+ Ordering by publish or event timestamp
++ Ordering by publish or event timestamp for past events.
 + showUpcomming, methods for showing upcomming events, templage tag ``showUpcomming``.
 
 
