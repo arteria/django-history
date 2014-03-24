@@ -101,7 +101,7 @@ def showAll(request, who, amount=10, pageIndex=1):
     hasMore = thisPage.has_next()
     listOfFutureEvents = thisPage.object_list
     
-    return safe(render_to_string('history/upcomming.html', {'listOfFutureEvents': listOfFutureEvents,
+    return safe(render_to_string('history/history.html', {'listOfFutureEvents': listOfFutureEvents,
                                                           'hasMore': hasMore,
                                                           'isFirst': isFirst,
                                                           'pageIndex': pageIndex,
