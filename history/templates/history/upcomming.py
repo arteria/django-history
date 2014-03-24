@@ -2,7 +2,7 @@
 {% load history_tags %}  
 
 {% if isFirst %}
-	<h1>{% blocktrans %}Stream{% endblocktrans %}</h1>
+	<h1>{% blocktrans %}Upcomming events{% endblocktrans %}</h1>
 {% else %}
     {# no header #}
 {% endif %}
@@ -13,7 +13,7 @@
 		<hr>
     </div>
 {% empty %}
-    {% blocktrans %}No events in stream!{% endblocktrans %}
+    {% blocktrans %}No events scheduled!{% endblocktrans %}
 {% endfor %} 
  
 {% if hasMoreEvents %}

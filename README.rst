@@ -84,6 +84,10 @@ History and change log
 Development
 ~~~~~~~~~~
 
+
+0.1.1
+~~~~~
+
 + ``showAll`` methode showing the past and upcomming events in one stream.
 + Fixed Manifest.in
 + Added ``is_sticky`` a flag that holds events on top of the timeline. Please migrate manually. Thanks.
@@ -93,7 +97,7 @@ Development
 + Stricky in ordering
 + Ordering by publish or event timestamp for past events.
 + showUpcomming, methods for showing upcomming events, templage tag ``showUpcomming``.
-
++ User ``request| ... :'auto| ... '`` to automatically take the username from the request object.
 
 0.1.0
 ~~~~~
@@ -104,7 +108,7 @@ TODOs and know issues
 ----
 
 + Potect private timelines
-+ Allow sticky events (highlight, keep them on top)
++ Allow sticky events (highlight, keep them on top) - seems broken
 + moments.js https://github.com/moment/moment/
 + AJAX loading of next page
 + Settings support (load n events per page)
@@ -113,6 +117,7 @@ TODOs and know issues
 + Add template for upcomming events
 + Send signal when a new event is added to the history
 + Ordering on past events (HISTORY_ORDER_BY) in utils.py  fx: showAll()
++ Currently it's anonymous or personalizerd history timelines. Next step should be mixed (place anonyoums events in personalized timelines).
 
 License
 -------

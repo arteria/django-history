@@ -88,6 +88,9 @@ def showHistoryWrapper(request, arguments):
 def showAll(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
         hs, created = History.objects.get_or_create(owner=None)
+    elif who == "auto":
+        # automatically get username from request
+        hs, created = History.objects.get_or_create(owner__username=request.user.username)
     else:
         # 'who' is an username (string)
         hs, created = History.objects.get_or_create(owner__username=who)
@@ -111,6 +114,9 @@ def showAll(request, who, amount=10, pageIndex=1):
 def showUpcomming(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
         hs, created = History.objects.get_or_create(owner=None)
+    elif who == "auto":
+        # automatically get username from request
+        hs, created = History.objects.get_or_create(owner__username=request.user.username)
     else:
         # 'who' is an username (string)
         hs, created = History.objects.get_or_create(owner__username=who)
@@ -131,6 +137,7 @@ def showUpcomming(request, who, amount=10, pageIndex=1):
     listOfFutureEvents = thisPage.object_list
     
     return safe(render_to_string('history/upcomming.html', {'listOfFutureEvents': listOfFutureEvents,
+                                                             'events': listOfFutureEvents,
                                                           'hasMore': hasMore,
                                                           'isFirst': isFirst,
                                                           'pageIndex': pageIndex,
@@ -141,6 +148,9 @@ def showUpcomming(request, who, amount=10, pageIndex=1):
 def showHistory(request, who, amount=10, pageIndex=1):
     if who == "anonymous":
         hs, created = History.objects.get_or_create(owner=None)
+    elif who == "auto":
+        # automatically get username from request
+        hs, created = History.objects.get_or_create(owner__username=request.user.username)
     else:
         # 'who' is an username (string)
         hs, created = History.objects.get_or_create(owner__username=who)
@@ -169,6 +179,7 @@ def showHistory(request, who, amount=10, pageIndex=1):
     listOfHistoryEvents = thisPage.object_list
     
     return safe(render_to_string('history/history.html', {'listOfHistoryEvents': listOfHistoryEvents,
+                                                          'events': listOfHistoryEvents,
                                                           'hasMore': hasMore,
                                                           'isFirst': isFirst,
                                                           'pageIndex': pageIndex,
