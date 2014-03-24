@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
     
 
 
-from history.utils import showHistoryWrapper, showUpcommingWrapper
+from history.utils import showHistoryWrapper, showUpcommingWrapper, showFullStreamWrapper
 
 register = template.Library()
 
@@ -34,4 +34,5 @@ def renderHistoryEvent(request, historyEvent):
 # Allow to use showHistory as template tag
 register.filter('showHistory', showHistoryWrapper)
 register.filter('showUpcomming', showUpcommingWrapper)
+register.filter('showFullStream', showFullStreamWrapper)
 
