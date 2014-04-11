@@ -5,9 +5,9 @@ from .models import *
 
 class HistoryEventAdmin(admin.ModelAdmin):
     date_hierarchy = 'event_timestamp'
-    list_display = ('content_type', 'event_timestamp', 'publish_timestamp', 'object_id')
-    search_fields = ['content_type', 'slug', 'desc']
-    list_filter = ('content_type', 'is_internal', 'is_hidden')
+    list_display = ('display_as', 'event_timestamp', 'publish_timestamp', 'related_object_admin')
+    search_fields = ['content_type']
+    list_filter = ('is_hidden', 'is_internal', 'content_type')
 
     def related_object_admin(self, obj):
         """ Display link to related object's admin """
