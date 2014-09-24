@@ -1,7 +1,10 @@
+NOTE: https://github.com/arteria/django-history is no longer maintained!
+
+
 Django History
 ============
 
-django-history [https://github.com/arteria/django-history] is a reusable Django app showing the history of object based events. This is also "known" as timeline.  
+django-history is a reusable Django app showing the history of object based events. This is also "known" as timeline.  
 
 Installation
 ------------
